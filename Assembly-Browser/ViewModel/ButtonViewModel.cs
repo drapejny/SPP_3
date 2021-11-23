@@ -60,18 +60,15 @@ namespace Assembly_Browser.ViewModel
 
             if(isOpen == null)
             {
-                //MessageBox.Show("ohhhh");
                 FileName = "File hasn't been chosen.";
                 return;
             }
 
             if (isOpen.Value)
             {
-                //MessageBox.Show("opened");
                 FileName = fileDialog.FileName;
                 CreateTree(FileName);
             }
-            //MessageBox.Show("Button is cliicked");
         }
 
         private List<Container> _namespaces;
@@ -97,14 +94,10 @@ namespace Assembly_Browser.ViewModel
                 OnPropertyChanged("Signature");
                 OnPropertyChanged("Members");
                 OnPropertyChanged(nameof(Namespaces));
-                MessageBox.Show("Managed");
             }catch(Exception e)
             {
                 MessageBox.Show(e.Message);
-                
             }
-
-            //OnPropertyChanged("Signature");
         }
 
     }
