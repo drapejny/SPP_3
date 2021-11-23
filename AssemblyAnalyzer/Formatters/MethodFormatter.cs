@@ -12,26 +12,25 @@ namespace AssemblyAnalyzer.Formatters
     {
         public static string Format(MethodInfo methodInfo)
         {
-            return string.Join(" ", 
-                GetTypeAccessorModifiers(methodInfo), 
-                GetTypeModifiers(methodInfo),
-                GetReturnType(methodInfo), 
-                methodInfo.Name, 
-                GetMethodArguments(methodInfo));
+            return GetTypeAccessorModifiers(methodInfo) +
+                GetTypeModifiers(methodInfo) +
+                GetReturnType(methodInfo) +
+                methodInfo.Name +
+                GetMethodArguments(methodInfo);
         }
 
         private static string GetTypeAccessorModifiers(MethodInfo methodInfo)
         { 
             if (methodInfo.IsPublic)
-                return "public";
+                return "public ";
             if (methodInfo.IsPrivate)
-                return "private";
+                return "private ";
             if (methodInfo.IsFamily)
-                return "protected";
+                return "protected ";
             if (methodInfo.IsAssembly)
-                return "internal";
+                return "internal ";
             if (methodInfo.IsFamilyOrAssembly)
-                return "protected internal";
+                return "protected internal ";
 
             return "";
         }
@@ -39,13 +38,13 @@ namespace AssemblyAnalyzer.Formatters
         private static string GetTypeModifiers(MethodInfo methodInfo)
         {
             if (methodInfo.IsAbstract)
-                return "abstract";
+                return "abstract ";
             if (methodInfo.IsStatic)
-                return "static";
+                return "static ";
             if (methodInfo.IsVirtual)
-                return "virtual";
+                return "virtual ";
             if (methodInfo.GetBaseDefinition() != methodInfo)
-                return "override";
+                return "override ";
 
             return "";
         }
@@ -54,7 +53,7 @@ namespace AssemblyAnalyzer.Formatters
         {
             if (methodInfo.ReturnType.IsGenericType)
                 return GetGenericType(methodInfo.ReturnType);
-            return methodInfo.ReturnType.Name;
+            return methodInfo.ReturnType.Name + " ";
         }
 
         private static string GetMethodArguments(MethodBase methodInfo)

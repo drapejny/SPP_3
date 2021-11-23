@@ -10,25 +10,24 @@ namespace AssemblyAnalyzer.Formatters
     {
         public static string Format(Type type)
         {
-            return string.Join(" ",
-                GetTypeAccessorModifiers(type),
-                GetTypeModifiers(type),
-                GetType(type),
-                type.Name);
+            return GetTypeAccessorModifiers(type) +
+                GetTypeModifiers(type) +
+                GetType(type) +
+                type.Name;
         }
 
         private static string GetTypeAccessorModifiers(Type type)
         {
             if (type.IsNestedPublic || type.IsPublic)
-                return "public";
+                return "public ";
             if (type.IsNestedPrivate)
-                return "private";
+                return "private ";
             if (type.IsNestedFamily)
-                return "protected";
+                return "protected ";
             if (type.IsNestedAssembly)
-                return "internal";
+                return "internal ";
             if (type.IsNestedFamORAssem)
-                return "protected internal";
+                return "protected internal ";
             if (type.IsNestedFamANDAssem)
                 return "private protected ";
             if (type.IsNotPublic)
@@ -40,11 +39,11 @@ namespace AssemblyAnalyzer.Formatters
         private static string GetTypeModifiers(Type type)
         {
             if (type.IsAbstract && type.IsSealed)
-                return "static";
+                return "static ";
             if (type.IsAbstract)
-                return "abstract";
+                return "abstract ";
             if (type.IsSealed)
-                return "sealed";
+                return "sealed ";
 
             return "";
         }

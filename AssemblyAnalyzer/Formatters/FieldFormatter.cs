@@ -12,37 +12,36 @@ namespace AssemblyAnalyzer.Formatters
     {
         public static string Format(FieldInfo fieldInfo)
         {
-            return string.Join(" ", 
-                GetTypeAccessorModifiers(fieldInfo), 
-                GetTypeModifiers(fieldInfo),
-                GetType(fieldInfo), 
-                fieldInfo.Name);
+            return GetTypeAccessorModifiers(fieldInfo) +
+                GetTypeModifiers(fieldInfo) +
+                GetType(fieldInfo) +
+                fieldInfo.Name;
         }
         private static string GetTypeAccessorModifiers(FieldInfo filedInfo)
         {
             if (filedInfo.IsPublic)
-                return "public";
+                return "public ";
             if (filedInfo.IsPrivate)
-                return "private";
+                return "private ";
             if (filedInfo.IsFamily)
-                return "protected";
+                return "protected ";
             if (filedInfo.IsAssembly)
-                return "internal";
+                return "internal ";
             if (filedInfo.IsFamilyOrAssembly)
-                return "protected internal";
+                return "protected internal ";
 
             return "";
         }
 
         private static string GetTypeModifiers(FieldInfo fieldInfo)
         {
-            return fieldInfo.IsStatic ? "static" : "";
+            return fieldInfo.IsStatic ? "static " : "";
         }
 
         private static string GetType(FieldInfo fieldInfo)
         {
             if (fieldInfo.FieldType.IsGenericType) return GetGenericType(fieldInfo.FieldType);
-            return fieldInfo.FieldType.Name;
+            return fieldInfo.FieldType.Name + " ";
         }
 
         private static string GetGenericType(Type parameter)

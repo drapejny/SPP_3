@@ -12,24 +12,23 @@ namespace AssemblyAnalyzer.Formatters
     {
         public static string Format(ConstructorInfo constrInfo)
         {
-            return string.Join(" ", 
-                GetTypeAccessorModifiers(constrInfo),
-                constrInfo.Name,
-                GetConstructorArguments(constrInfo));
+            return  GetTypeAccessorModifiers(constrInfo) +
+                constrInfo.Name +
+                GetConstructorArguments(constrInfo);
         }
 
         private static string GetTypeAccessorModifiers(ConstructorInfo constrInfo)
         {
             if (constrInfo.IsPublic)
-                return "public";
+                return "public ";
             if (constrInfo.IsPrivate)
-                return "private";
+                return "private ";
             if (constrInfo.IsFamily)
-                return "protected";
+                return "protected ";
             if (constrInfo.IsAssembly)
-                return "internal";
+                return "internal ";
             if (constrInfo.IsFamilyOrAssembly)
-                return "protected internal";
+                return "protected internal ";
 
             return "";
         }
