@@ -51,10 +51,9 @@ namespace TestProject1
             string filePath = "D:\\VS Projects\\ABCD\\ABCD\\bin\\Debug\\net472\\ABCD.dll";
             AssemblyBrowser browser = new AssemblyBrowser();
             var assemblyInfo = browser.GetAssemblyInfo(filePath);
-            int actual = assemblyInfo[0].Members[0].Signature.Split("\n").Length;
-            int expected = 1;
-            Assert.AreEqual(expected, actual);
+            int actual = ((Container)assemblyInfo[0].Members[0]).Members.Count;
+            int expected = 3;
+            Assert.AreEqual(expected,actual);
         }
-
     }
 }
