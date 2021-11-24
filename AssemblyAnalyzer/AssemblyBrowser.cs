@@ -55,9 +55,6 @@ namespace AssemblyAnalyzer
             foreach (var method in type.GetMethods(Instance | Static | Public | NonPublic | DeclaredOnly))
             {
 
-                if (type.IsDefined(typeof(ExtensionAttribute), false) && method.IsDefined(typeof(ExtensionAttribute), false))
-                    continue;
-
                 var signature = MethodFormatter.Format(method);
                 methodInfos.Add(new MemberInfo(signature, ClassFormatter.Format(type)));
             }
