@@ -23,5 +23,38 @@ namespace TestProject1
             Assert.Throws<System.IO.FileNotFoundException>(() => browser.GetAssemblyInfo(filePath));
         }
 
+        [Test]
+        public void AssemblyNamespacesTest()
+        {
+            string filePath = "D:\\VS Projects\\ABCD\\ABCD\\bin\\Debug\\net472\\ABCD.dll";
+            AssemblyBrowser browser = new AssemblyBrowser();
+            var assemblyInfo = browser.GetAssemblyInfo(filePath);
+            int actual = assemblyInfo.Count;
+            int expected = 2;
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void AssemblyClassesTest()
+        {
+            string filePath = "D:\\VS Projects\\ABCD\\ABCD\\bin\\Debug\\net472\\ABCD.dll";
+            AssemblyBrowser browser = new AssemblyBrowser();
+            var assemblyInfo = browser.GetAssemblyInfo(filePath);
+            int actual = assemblyInfo[0].Members.Count;
+            int expected = 1;
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test]
+        public void AssemblyClassMembersTest()
+        {
+            string filePath = "D:\\VS Projects\\ABCD\\ABCD\\bin\\Debug\\net472\\ABCD.dll";
+            AssemblyBrowser browser = new AssemblyBrowser();
+            var assemblyInfo = browser.GetAssemblyInfo(filePath);
+            int actual = assemblyInfo[0].Members[0].Signature.Split("\n").Length;
+            int expected = 1;
+            Assert.AreEqual(expected, actual);
+        }
+
     }
 }
